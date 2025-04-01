@@ -3,6 +3,7 @@ package com.task.TaskManagement.controller;
 
 import com.task.TaskManagement.dto.TasksDTO;
 import com.task.TaskManagement.model.Task;
+import com.task.TaskManagement.service.TaskReminderService;
 import com.task.TaskManagement.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private TaskReminderService reminderService;
 
     @GetMapping
     public ResponseEntity<List<TasksDTO>> getAllTasks() {
@@ -27,6 +30,12 @@ public class TaskController {
     @GetMapping("/{id}")
     public ResponseEntity<TasksDTO> getTaskById(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.getTaskById(id));
+    }
+
+    @PostMapping("/send")
+    public ResponseEntity<String> triggerReminders() {
+        reminderService.sentTaskRemainders();
+        return ResponseEntity.ok("Reminders sent manually");
     }
 
     @PostMapping
@@ -43,6 +52,7 @@ public class TaskController {
     public  void deleteById(@PathVariable Long id){
          taskService.deleteTask(id);
     }
+
     @GetMapping("/test")
     public ResponseEntity<Object> Tasting() {
         return ResponseEntity.ok("It worked");
