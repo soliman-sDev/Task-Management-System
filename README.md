@@ -131,7 +131,7 @@ public class LoggingAspect {
 | GET     | api/tasts       | Retrive all Tasks  |
 | GET     | api/tasts/{id}  | Retrive Task by Id |
 | POST    | api/tasts       | Create new Task    |
-| POST    | api/tasts       | send email reminder to assigned user   |
+| POST    | api/tasts/send  | send email reminder to assigned user   |
 | UPDATE  | api/tasts/{id}  | Update a task      |
 | DELETE  | api/tasts/{id}  | Delete a task      |
 
